@@ -32,7 +32,7 @@
 ## FASE 2 — Modelos e tipos compartilhados
 
 ### 2.1 API — Tipos TypeScript
-- [ ] Criar `src/lib/types.ts` com interfaces:
+- [x] Criar `lib/types.ts` com interfaces:
   - `QueryRequest` (campos: `api_key`, `query_id`, `sql`, `params`, `timeout_ms`)
   - `QueryResult` (campos: `query_id`, `status`, `columns`, `rows`, `row_count`, `duration_ms`)
   - `QueryError` (campos: `query_id`, `status`, `error.code`, `error.message`, `duration_ms`)
@@ -41,7 +41,7 @@
   - `OracleCredentials` (campos: `host`, `port`, `service`, `user`, `password`)
 
 ### 2.2 Agente — Structs Go
-- [ ] Criar `internal/model/messages.go` com structs:
+- [x] Criar `internal/model/messages.go` com structs:
   - `AuthMessage` (campos: `Type`, `Key`)
   - `PingMessage` (campo: `Type`)
   - `PongMessage` (campo: `Type`)
