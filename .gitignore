@@ -24,8 +24,13 @@ agent/build/
 *.exe
 *.test
 
-# Oracle Instant Client (não deve ser versionado)
+# Oracle Instant Client (não deve ser versionado — arquivos muito grandes)
 instantclient*/
+META-INF/
+*.zip
+
+# Distribuição portável gerada por "make dist"
+agent/dist/
 
 # OS
 .DS_Store

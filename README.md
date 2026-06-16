@@ -90,27 +90,30 @@ Guarde esse valor — ele será usado no Render e no agente.
 
 6. Clique em **Deploy** — anote a URL gerada (ex: `https://jrti-oracle-query-api.onrender.com`)
 
-### Passo 3 — Instalar Oracle Instant Client no Windows
+### Passo 3 — Preparar Oracle Instant Client e compilar
 
-Baixe o **Instant Client 19c Basic** para Windows x64:
-https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html
-
-Extraia para `C:\oracle\instantclient_19_19\` e adicione ao `PATH` do sistema.
-
-### Passo 4 — Compilar e configurar o agente
+Baixe o **Instant Client 19c Basic** para Windows x64 e coloque o zip na pasta `agent/`.  
+Também é necessário ter [Go 1.21+](https://go.dev/dl/) e [MinGW-w64](https://www.mingw-w64.org/) (GCC) instalados e no PATH.
 
 ```bash
 cd agent
+
+# Extraia o zip na pasta agent/ (será criada instantclient_19_30/)
+# Em seguida, gere o pacote portável:
 go mod download
-make build
-# Gera: jrti-oracle-query.exe
+make dist
+# Gera: dist/jrti-oracle-query.exe  +  dist/*.dll  (~217 MB)
 ```
 
-### Passo 5 — Executar o agente
+O diretório `dist/` contém tudo que é necessário: basta copiá-lo para qualquer máquina Windows — **sem instalar Oracle Client no sistema**.
+
+### Passo 4 — Executar o agente
+
+Copie a pasta `agent/dist/` para a máquina Windows com Oracle. Execute dentro da pasta `dist/`:
 
 **Modo terminal (desenvolvimento):**
 
-```bash
+```bat
 jrti-oracle-query.exe --key=sk_a3f8c21d... --url=wss://jrti-oracle-query-api.onrender.com
 ```
 
@@ -118,12 +121,14 @@ jrti-oracle-query.exe --key=sk_a3f8c21d... --url=wss://jrti-oracle-query-api.onr
 
 ```bat
 sc create JRTiOracleQuery ^
-  binPath= "C:\jrti\jrti-oracle-query.exe --key=sk_... --url=wss://jrti-oracle-query-api.onrender.com" ^
+  binPath= "C:\jrti\dist\jrti-oracle-query.exe --key=sk_... --url=wss://jrti-oracle-query-api.onrender.com" ^
   start= auto
 sc start JRTiOracleQuery
 ```
 
-### Passo 6 — Testar a integração
+> O agente encontra os DLLs Oracle automaticamente porque estão na mesma pasta do `.exe` — nenhuma configuração de PATH ou instalação de Oracle Client é necessária.
+
+### Passo 5 — Testar a integração
 
 ```bash
 curl -X POST https://jrti-oracle-query-api.onrender.com/api/query \

@@ -4,66 +4,37 @@ Agente local que conecta ao servidor Oracle 10g e encaminha consultas recebidas 
 
 ---
 
-## Pré-requisitos
+## Pré-requisitos de compilação (apenas na máquina que compila)
 
-| Requisito | Versão mínima |
-|---|---|
-| Go | 1.21+ |
-| Oracle Instant Client | 19c (Basic ou Basic Lite) |
-| Windows | 64-bit (Windows 10 ou superior) |
+| Requisito | Versão mínima | Observação |
+|---|---|---|
+| Go | 1.21+ | [go.dev/dl](https://go.dev/dl/) |
+| MinGW-w64 (GCC) | qualquer | `choco install mingw` ou [mingw-w64.org](https://www.mingw-w64.org/) |
+| Oracle Instant Client zip | 19c Basic, Windows x64 | Colocar o `.zip` na pasta `agent/` |
 
----
-
-## 1. Instalar o Oracle Instant Client no Windows
-
-1. Baixe o **Instant Client 19c Basic** para Windows x64 em:
-   https://www.oracle.com/database/technologies/instant-client/winx64-64-downloads.html
-
-2. Extraia o arquivo ZIP para uma pasta fixa, por exemplo:
-   ```
-   C:\oracle\instantclient_19_19\
-   ```
-
-3. Adicione essa pasta ao `PATH` do sistema:
-   - Painel de Controle → Sistema → Variáveis de Ambiente
-   - Em **Variáveis do sistema**, edite `Path` e adicione:
-     ```
-     C:\oracle\instantclient_19_19
-     ```
-
-4. Reinicie o terminal e confirme:
-   ```
-   where oci.dll
-   ```
+> A máquina de destino que vai **rodar** o agente não precisa de nada instalado — tudo está em `dist/`.
 
 ---
 
-## 2. Compilar o `.exe`
-
-### No Windows (com Go instalado)
+## 1. Compilar e montar o pacote portável
 
 ```bash
 cd agent
+
+# Extraia o Instant Client zip na pasta agent/ (resulta em instantclient_19_30/)
 go mod download
-make build
-# Gera: jrti-oracle-query.exe
+make dist
+# Gera: dist/jrti-oracle-query.exe  +  dist/*.dll  (~217 MB)
 ```
 
-### Em Linux/Mac (cross-compila para Windows)
+Copie a pasta `dist/` completa para qualquer máquina Windows — os DLLs Oracle ficam **junto ao `.exe`** e o Windows os encontra automaticamente (DLL search order inclui o diretório do executável).
+
+### Compilar só o `.exe` (sem montar o dist/)
 
 ```bash
-# Requer mingw-w64 para CGO cross-compilation
-# macOS: brew install mingw-w64
-cd agent
-make build
-# Gera: jrti-oracle-query.exe
-```
-
-Para testar localmente em Linux:
-
-```bash
-make build-linux
-# Gera: jrti-oracle-query
+make build        # Windows nativo com GCC no PATH
+make build-cross  # cross-compilação de Linux/Mac com mingw-w64
+make build-linux  # binário Linux para testes locais
 ```
 
 ---
@@ -85,7 +56,10 @@ As credenciais Oracle ficam **no Render** (nunca no Windows). Configure as segui
 
 ## 4. Executar no terminal (desenvolvimento)
 
-```bash
+Execute a partir da pasta `dist/`:
+
+```bat
+cd dist
 jrti-oracle-query.exe --key=sk_a3f8c21d... --url=wss://sua-api.render.com
 ```
 
@@ -108,8 +82,9 @@ Pressione `Ctrl+C` para encerrar.
 
 ```bat
 REM Instalar (substitua o path e os argumentos)
+REM O .exe deve ser executado de dentro da pasta dist/ para encontrar os DLLs Oracle
 sc create JRTiOracleQuery ^
-  binPath= "C:\jrti\jrti-oracle-query.exe --key=sk_... --url=wss://sua-api.render.com" ^
+  binPath= "C:\jrti\dist\jrti-oracle-query.exe --key=sk_... --url=wss://sua-api.render.com" ^
   start= auto ^
   DisplayName= "JRTi Oracle Query Agent"
 
