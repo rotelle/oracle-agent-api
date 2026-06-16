@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "ts-node --project tsconfig.json server.ts",
     "build": "next build",
-    "start": "next start"
+    "start": "ts-node --project tsconfig.json server.ts"
   },
   "dependencies": {
     "@types/ws": "^8.18.1",
@@ -18,6 +18,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

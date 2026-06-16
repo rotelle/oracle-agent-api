@@ -137,14 +137,14 @@
 
 ## FASE 7 — Servidor customizado (API)
 
-- [ ] Criar `api/server.ts`
-- [ ] Criar servidor HTTP nativo do Node.js
-- [ ] Instanciar `WebSocket.Server` sem porta própria (modo `noServer`)
-- [ ] Configurar upgrade de conexões HTTP para WebSocket na rota `/agent`
-- [ ] Passar todas as outras requisições HTTP para o handler do Next.js
-- [ ] Iniciar o servidor na porta definida por `process.env.PORT` ou `3000`
-- [ ] Logar no console quando o servidor estiver pronto
-- [ ] Atualizar `package.json` para usar `ts-node server.ts` no script `start` e `dev`
+- [x] Criar `api/server.ts`
+- [x] Criar servidor HTTP nativo do Node.js
+- [x] Instanciar `WebSocket.Server` sem porta própria (modo `noServer`)
+- [x] Configurar upgrade de conexões HTTP para WebSocket na rota `/agent`
+- [x] Passar todas as outras requisições HTTP para o handler do Next.js
+- [x] Iniciar o servidor na porta definida por `process.env.PORT` ou `3000`
+- [x] Logar no console quando o servidor estiver pronto
+- [x] Atualizar `package.json` para usar `ts-node server.ts` no script `start` e `dev`
 
 ---
 
