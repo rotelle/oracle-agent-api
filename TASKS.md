@@ -88,24 +88,24 @@
 
 ## FASE 5 — Gerenciador de queries pendentes (API)
 
-- [ ] Criar `src/lib/query-manager.ts`
-- [ ] Implementar classe `QueryManager` com:
-  - `Map` interno `pendingQueries` tipado com `query_id` como chave
+- [x] Criar `lib/query-manager.ts`
+- [x] Implementar classe `QueryManager` com:
+  - `Map` interno `pending` tipado com `query_id` como chave
   - Método `register(queryId: string, timeoutMs: number): Promise<QueryResult>` que:
     - Cria Promise e armazena `resolve`, `reject` e timer no Map
     - Timer rejeita com erro `TIMEOUT` ao expirar e remove do Map
     - Retorna a Promise
-  - Método `resolve(result: ResultMessage): void` que:
+  - Método `resolve(result: ResultPayload): void` que:
     - Busca a Promise pelo `query_id`
     - Cancela o timer
-    - Resolve a Promise com o resultado
+    - Resolve ou rejeita a Promise conforme `status`
     - Remove do Map
   - Método `rejectAll(code: string, message: string): void` que:
     - Rejeita todas as Promises pendentes com o código e mensagem fornecidos
     - Cancela todos os timers
     - Limpa o Map
   - Método `hasPending(queryId: string): boolean`
-- [ ] Exportar instância singleton de `QueryManager`
+- [x] Exportar instância singleton de `QueryManager`
 
 ---
 
