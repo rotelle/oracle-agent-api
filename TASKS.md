@@ -111,8 +111,8 @@
 
 ## FASE 6 — Gerenciador do agente WebSocket (API)
 
-- [ ] Criar `src/lib/agent-manager.ts`
-- [ ] Implementar classe `AgentManager` com:
+- [x] Criar `lib/agent-manager.ts`
+- [x] Implementar classe `AgentManager` com:
   - Propriedade `connected: boolean`
   - Referência para o WebSocket do agente conectado (apenas um agente por vez)
   - Método `handleConnection(ws: WebSocket): void` que:
@@ -122,7 +122,7 @@
     - Se válida: marca como conectado, envia credenciais criptografadas
     - Registra handler para mensagens recebidas
     - Registra handler para fechamento/erro: marca como desconectado, chama `queryManager.rejectAll("AGENT_DISCONNECTED", ...)`
-  - Método `sendQuery(message: QueryMessage): boolean` que:
+  - Método `sendQuery(query: QueryRequest): boolean` que:
     - Retorna `false` se agente não conectado
     - Envia JSON via WebSocket
     - Retorna `true`
@@ -131,7 +131,7 @@
     - Se `type === "ping"`: responde com `{ type: "pong" }`
     - Se `type === "result"`: chama `queryManager.resolve(message)`
   - Método `buildCredentialsPayload(): string` que monta e criptografa as credenciais Oracle a partir das variáveis de ambiente
-- [ ] Exportar instância singleton de `AgentManager`
+- [x] Exportar instância singleton de `AgentManager`
 
 ---
 
