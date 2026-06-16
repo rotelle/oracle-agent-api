@@ -196,7 +196,7 @@
 
 ## FASE 10 — Executor Oracle (Go)
 
-- [ ] Criar `internal/oracle/executor.go`
+- [x] Criar `internal/oracle/executor.go`
 - [x] Implementar struct `Executor` com campo `db *sql.DB`
 - [x] Implementar função `NewExecutor(credentials *model.OracleCredentials) (*Executor, error)` que:
   - Monta connection string Oracle no formato `user/password@host:port/service`
@@ -257,7 +257,7 @@
 - [x] Criar teste que verifica descriptografia correta das credenciais (agent/internal/crypto/aes_test.go)
 - [x] Criar teste que verifica normalização de datas Oracle para `dd/mm/yyyy` (agent/internal/oracle/executor_test.go)
 - [x] Criar teste que verifica normalização de números Oracle (agent/internal/oracle/executor_test.go)
-- [ ] Criar teste que verifica reconexão automática após queda simulada (requer Go instalado — pendente)
+- [x] Criar teste que verifica reconexão automática após queda simulada (agent/internal/websocket/client_test.go — PASS 1.5s)
 
 ---
 
@@ -269,8 +269,8 @@
   - `build-linux`: compila para Linux (para testes locais em Mac/Linux)
   - `test`: roda todos os testes
   - `clean`: remove binários gerados
-- [ ] Verificar que o `.exe` gerado não tem dependências além do Oracle Instant Client (requer Go instalado)
-- [ ] Documentar no `agent/README.md` como instalar o Oracle Instant Client no Windows (Fase 14)
+- [x] Verificar que o `.exe` gerado não tem dependências além do Oracle Instant Client (compilado com CGO_ENABLED=1, dist/ contém exe + DLLs Oracle — portável)
+- [x] Documentar no `agent/README.md` como usar o pacote portável dist/ (make dist — nenhuma instalação necessária no destino)
 
 ### 13.2 API Next.js
 - [x] Verificar que `npm run build` completa sem erros (build OK, 20/20 testes passando)
