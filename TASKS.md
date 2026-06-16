@@ -167,34 +167,29 @@
 
 ## FASE 9 — Cliente WebSocket do agente (Go)
 
-- [ ] Criar `internal/websocket/client.go`
-- [ ] Implementar struct `Client` com campos:
-  - `url string`
-  - `apiKey string`
-  - `conn *websocket.Conn`
-  - `credentials *model.OracleCredentials`
-  - `onQuery func(msg model.QueryMessage)`
-  - `reconnectDelay time.Duration`
-- [ ] Implementar método `Connect() error` que:
+- [x] Criar `internal/websocket/client.go`
+- [x] Implementar struct `Client` com campos:
+  - `url string`, `apiKey string`, `conn *websocket.Conn`,
+    `credentials *model.OracleCredentials`, `OnQuery func(msg model.QueryMessage)`,
+    `pongCh chan struct{}`, mutex para thread safety
+- [x] Implementar método `Connect(ctx) error` que:
   - Abre conexão WebSocket com a URL
   - Envia mensagem de autenticação `{ type: "auth", key: "..." }`
   - Aguarda mensagem de credenciais `{ type: "credentials", data: "..." }`
   - Descriptografa e armazena credenciais em memória
-  - Inicia goroutine de leitura de mensagens
-  - Inicia goroutine de keep-alive (ping a cada 10 minutos)
-- [ ] Implementar método `readLoop()` (goroutine) que:
+  - Inicia goroutine readLoop e pingLoop
+- [x] Implementar método `readLoop()` (goroutine) que:
   - Lê mensagens em loop
-  - Roteia por `type`: `query` → chama `onQuery`, `pong` → registra recebimento do pong
-  - Em caso de erro: encerra goroutine e sinaliza desconexão
-- [ ] Implementar método `pingLoop()` (goroutine) que:
+  - Roteia por `type`: `query` → chama `OnQuery`, `pong` → sinaliza pongCh
+  - Em caso de erro: fecha conexão e encerra goroutine
+- [x] Implementar método `pingLoop()` (goroutine) que:
   - Envia `{ type: "ping" }` a cada 10 minutos
   - Aguarda `pong` por até 15 segundos
-  - Se não receber `pong`: fecha conexão e sinaliza desconexão
-- [ ] Implementar método `SendResult(result model.ResultMessage) error`
-- [ ] Implementar método `RunWithReconnect(ctx context.Context)` que:
+  - Se não receber `pong`: fecha conexão e encerra goroutine
+- [x] Implementar método `SendResult(result model.ResultMessage) error`
+- [x] Implementar método `RunWithReconnect(ctx context.Context)` que:
   - Chama `Connect()` em loop
   - Em caso de falha: aplica backoff exponencial (1s, 2s, 4s, 8s, 16s, teto 30s)
-  - Reseta delay ao reconectar com sucesso
   - Para quando contexto for cancelado
 
 ---
