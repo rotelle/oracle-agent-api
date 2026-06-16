@@ -225,27 +225,22 @@
 
 ## FASE 11 — Ponto de entrada do agente (Go)
 
-- [ ] Criar `agent/main.go`
-- [ ] Implementar parsing de argumentos de linha de comando:
+- [x] Criar `agent/main.go`
+- [x] Implementar parsing de argumentos de linha de comando:
   - `--key` → chave de autenticação (obrigatório)
   - `--url` → URL WebSocket da API (obrigatório)
   - Exibir mensagem de uso e encerrar com código 1 se algum argumento estiver ausente
-- [ ] Configurar logger estruturado com timestamp para todos os eventos relevantes:
-  - Tentativas de conexão
-  - Conexão estabelecida
-  - Credenciais recebidas
-  - Query recebida (logar apenas `query_id`, nunca o SQL completo em produção)
-  - Resultado enviado
-  - Desconexão e tentativas de reconexão
-- [ ] Instanciar `oracle.Executor` após receber credenciais
-- [ ] Registrar callback `onQuery` no cliente WebSocket que:
+- [x] Configurar logger com timestamp para todos os eventos relevantes:
+  - Tentativas de conexão, conexão estabelecida, credenciais recebidas
+  - Query recebida (apenas query_id, nunca o SQL)
+  - Resultado enviado, desconexão e reconexão
+- [x] Instanciar `oracle.Executor` após receber credenciais (via goroutine de polling)
+- [x] Registrar callback `OnQuery` no cliente WebSocket que:
   - Executa `executor.Execute(ctx, queryMessage)`
   - Envia resultado via `client.SendResult(result)`
-- [ ] Capturar sinais `SIGINT` e `SIGTERM` para encerramento gracioso:
-  - Logar encerramento
-  - Fechar WebSocket com mensagem de fechamento
-  - Fechar pool de conexões Oracle
-- [ ] Chamar `client.RunWithReconnect(ctx)` como loop principal
+- [x] Capturar sinais `SIGINT` e `SIGTERM` para encerramento gracioso:
+  - Logar encerramento, fechar WebSocket e pool Oracle
+- [x] Chamar `client.RunWithReconnect(ctx)` como loop principal
 
 ---
 
