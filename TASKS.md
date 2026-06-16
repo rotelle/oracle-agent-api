@@ -264,22 +264,19 @@
 ## FASE 13 — Build e empacotamento
 
 ### 13.1 Agente Go
-- [ ] Criar `agent/Makefile` com targets:
+- [x] Criar `agent/Makefile` com targets:
   - `build`: compila `jrti-oracle-query.exe` para Windows (GOOS=windows GOARCH=amd64)
   - `build-linux`: compila para Linux (para testes locais em Mac/Linux)
   - `test`: roda todos os testes
   - `clean`: remove binários gerados
-- [ ] Verificar que o `.exe` gerado não tem dependências além do Oracle Instant Client
-- [ ] Documentar no `agent/README.md` como instalar o Oracle Instant Client no Windows
+- [ ] Verificar que o `.exe` gerado não tem dependências além do Oracle Instant Client (requer Go instalado)
+- [ ] Documentar no `agent/README.md` como instalar o Oracle Instant Client no Windows (Fase 14)
 
 ### 13.2 API Next.js
-- [ ] Verificar que `npm run build` completa sem erros
-- [ ] Criar `api/render.yaml` com configurações de deploy:
-  - Tipo de serviço web
-  - Comando de build: `npm install && npm run build`
-  - Comando de start: `npm start`
-  - Variáveis de ambiente listadas (sem valores)
-- [ ] Verificar que todas as variáveis de ambiente estão documentadas em `.env.example`
+- [x] Verificar que `npm run build` completa sem erros (build OK, 20/20 testes passando)
+- [x] Criar `api/render.yaml` com configurações de deploy (web service, build/start commands, env vars)
+- [x] Verificar que todas as variáveis de ambiente estão documentadas em `.env.example`
+- [x] Adicionar script `test` ao package.json (`node --test lib/__tests__/*.test.mjs`)
 
 ---
 

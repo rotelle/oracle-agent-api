@@ -1,14 +1,14 @@
 import type WebSocket from "ws";
 import { encryptCredentials } from "./crypto";
 import { queryManager } from "./query-manager";
-import type { QueryRequest } from "./types";
+import type { QueryRequest, ColumnInfo } from "./types";
 
 type WsResultMessage = {
   type: "result";
   query_id: string;
   status: "success" | "error";
   duration_ms: number;
-  columns?: unknown[];
+  columns?: ColumnInfo[];
   rows?: Record<string, unknown>[];
   row_count?: number;
   error?: { code: string; message: string };

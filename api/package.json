@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "ts-node --project tsconfig.json server.ts",
     "build": "next build",
-    "start": "ts-node --project tsconfig.json server.ts"
+    "start": "ts-node --project tsconfig.json server.ts",
+    "test": "node --test lib/__tests__/*.test.mjs"
   },
   "dependencies": {
     "@types/ws": "^8.18.1",

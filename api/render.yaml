@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: jrti-oracle-query-api
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: AGENT_API_KEY
+        sync: false
+      - key: ORACLE_HOST
+        sync: false
+      - key: ORACLE_PORT
+        sync: false
+      - key: ORACLE_SERVICE
+        sync: false
+      - key: ORACLE_USER
+        sync: false
+      - key: ORACLE_PASSWORD
+        sync: false
