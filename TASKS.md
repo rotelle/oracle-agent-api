@@ -57,17 +57,17 @@
 ## FASE 3 — Criptografia
 
 ### 3.1 API — Módulo de criptografia
-- [ ] Criar `src/lib/crypto.ts`
-- [ ] Implementar função `deriveKey(apiKey: string): Buffer` que deriva chave AES-256 a partir da `AGENT_API_KEY` usando SHA-256
-- [ ] Implementar função `encryptCredentials(credentials: OracleCredentials, apiKey: string): string` usando AES-256-GCM com IV aleatório, retornando base64 no formato `iv:authTag:ciphertext`
-- [ ] Implementar função `decryptCredentials(encrypted: string, apiKey: string): OracleCredentials` para uso em testes
-- [ ] Escrever testes unitários para criptografia: cifrar e decifrar deve retornar o valor original
+- [x] Criar `lib/crypto.ts`
+- [x] Implementar função `deriveKey(apiKey: string): Buffer` que deriva chave AES-256 a partir da `AGENT_API_KEY` usando SHA-256
+- [x] Implementar função `encryptCredentials(credentials: OracleCredentials, apiKey: string): string` usando AES-256-GCM com IV aleatório, retornando base64 no formato `iv:authTag:ciphertext`
+- [x] Implementar função `decryptCredentials(encrypted: string, apiKey: string): OracleCredentials` para uso em testes
+- [x] Escrever testes unitários para criptografia: cifrar e decifrar deve retornar o valor original (5/5 passando)
 
 ### 3.2 Agente — Módulo de criptografia
-- [ ] Criar `internal/crypto/aes.go`
-- [ ] Implementar função `DeriveKey(apiKey string) []byte` usando SHA-256 (mesma lógica da API)
-- [ ] Implementar função `DecryptCredentials(encrypted string, apiKey string) (*model.OracleCredentials, error)` que lê base64 no formato `iv:authTag:ciphertext` e descriptografa com AES-256-GCM
-- [ ] Escrever teste unitário: descriptografar payload gerado pela API deve retornar credenciais corretas
+- [x] Criar `internal/crypto/aes.go`
+- [x] Implementar função `DeriveKey(apiKey string) []byte` usando SHA-256 (mesma lógica da API)
+- [x] Implementar função `DecryptCredentials(encrypted string, apiKey string) (*model.OracleCredentials, error)` que lê base64 no formato `iv:authTag:ciphertext` e descriptografa com AES-256-GCM
+- [x] Escrever teste unitário: descriptografar payload gerado pela API deve retornar credenciais corretas
 
 ---
 
