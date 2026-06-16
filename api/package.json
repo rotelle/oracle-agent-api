@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "ts-node --project tsconfig.json server.ts",
+    "dev": "tsx server.ts",
     "build": "next build",
-    "start": "ts-node --project tsconfig.json server.ts",
+    "start": "tsx server.ts",
     "test": "node --test lib/__tests__/*.test.mjs"
   },
   "dependencies": {
@@ -15,11 +15,14 @@
     "react-dom": "19.2.4",
     "ws": "^8.21.0"
   },
+  "engines": {
+    "node": ">=20"
+  },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.19.2",
     "typescript": "^5"
   }
 }
