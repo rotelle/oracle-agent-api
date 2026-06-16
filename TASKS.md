@@ -282,19 +282,21 @@
 
 ## FASE 14 — Documentação final
 
-- [ ] Criar `agent/README.md` em Português do Brasil com:
+- [x] Criar `agent/README.md` em Português do Brasil com:
   - Pré-requisitos (Go, Oracle Instant Client)
-  - Como compilar o `.exe`
+  - Como compilar o `.exe` (make build / make build-linux)
   - Como configurar variáveis de ambiente Oracle no Render
-  - Como executar no terminal
-  - Como instalar como serviço Windows
-  - Como parar e remover o serviço
-- [ ] Criar `api/README.md` em Português do Brasil com:
-  - Pré-requisitos
-  - Como configurar variáveis de ambiente no Render
-  - Como fazer deploy no Render
-  - Documentação do endpoint `POST /api/query` com exemplos de request e response
-- [ ] Atualizar `README.md` da raiz com:
-  - Diagrama ASCII da arquitetura
-  - Passo a passo completo do zero ao funcionando
-  - Link para os READMEs de cada aplicação
+  - Como executar no terminal (--key, --url)
+  - Como instalar como serviço Windows (sc create/start/stop/delete)
+  - Como rodar os testes (go test ./...)
+- [x] Criar `api/README.md` em Português do Brasil com:
+  - Pré-requisitos e variáveis de ambiente
+  - Como fazer deploy no Render (render.yaml e manual)
+  - Documentação completa do endpoint POST /api/query com exemplos
+  - Tabela de códigos de erro HTTP
+  - Como rodar localmente e como rodar os testes
+- [x] Atualizar `README.md` da raiz com:
+  - Diagrama ASCII da arquitetura atualizado
+  - Estrutura completa do repositório
+  - Passo a passo do zero ao funcionando (6 passos)
+  - Links para todos os READMEs e documentos SDD
