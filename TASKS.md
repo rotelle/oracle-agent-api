@@ -150,8 +150,8 @@
 
 ## FASE 8 — Endpoint de consulta (API)
 
-- [ ] Criar `src/app/api/query/route.ts`
-- [ ] Implementar handler `POST`:
+- [x] Criar `app/api/query/route.ts`
+- [x] Implementar handler `POST`:
   - Fazer parse do body como JSON
   - Chamar `validateQueryRequest(body)` — retornar erro `400` com `INVALID_REQUEST` se falhar
   - Chamar `validateApiKey(body.api_key)` — retornar erro `401` com `UNAUTHORIZED` se falhar
@@ -160,8 +160,8 @@
   - Enviar query ao agente via `agentManager.sendQuery(...)`
   - Aguardar a Promise (conexão suspensa)
   - Retornar resultado com status `200`
-  - Capturar erros: retornar status `504` para `TIMEOUT`, `503` para `AGENT_DISCONNECTED`, `500` para outros
-- [ ] Garantir que todos os erros retornam JSON no formato definido na SPEC
+  - Capturar erros: retornar status `504` para `TIMEOUT`, `503` para `AGENT_DISCONNECTED`, `200` para erros Oracle ORA-XXXXX
+- [x] Garantir que todos os erros retornam JSON no formato definido na SPEC
 
 ---
 
