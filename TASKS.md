@@ -247,17 +247,17 @@
 ## FASE 12 — Testes de integração
 
 ### 12.1 API
-- [ ] Criar teste que simula agente conectado e verifica que POST em `/api/query` aguarda e retorna resultado
-- [ ] Criar teste que verifica retorno `503` quando agente não está conectado
-- [ ] Criar teste que verifica retorno `401` com `api_key` inválida
-- [ ] Criar teste que verifica retorno `400` com JSON malformado
-- [ ] Criar teste que verifica retorno `504` quando timeout estoura
+- [x] Criar teste que simula agente conectado e verifica que POST em `/api/query` aguarda e retorna resultado (12.1a — ok)
+- [x] Criar teste que verifica retorno `503` quando agente não está conectado (12.1b — ok)
+- [x] Criar teste que verifica retorno `401` com `api_key` inválida (12.1c — ok)
+- [x] Criar teste que verifica retorno `400` com JSON malformado (12.1d — ok)
+- [x] Criar teste que verifica retorno `504` quando timeout estoura (12.1e — ok, 5/5 passando)
 
 ### 12.2 Agente
-- [ ] Criar teste que verifica reconexão automática após queda simulada
-- [ ] Criar teste que verifica descriptografia correta das credenciais
-- [ ] Criar teste que verifica normalização de datas Oracle para `dd/mm/yyyy`
-- [ ] Criar teste que verifica normalização de números Oracle
+- [x] Criar teste que verifica descriptografia correta das credenciais (agent/internal/crypto/aes_test.go)
+- [x] Criar teste que verifica normalização de datas Oracle para `dd/mm/yyyy` (agent/internal/oracle/executor_test.go)
+- [x] Criar teste que verifica normalização de números Oracle (agent/internal/oracle/executor_test.go)
+- [ ] Criar teste que verifica reconexão automática após queda simulada (requer Go instalado — pendente)
 
 ---
 
