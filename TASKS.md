@@ -73,8 +73,8 @@
 
 ## FASE 4 — Validação de entrada (API)
 
-- [ ] Criar `src/lib/validator.ts`
-- [ ] Implementar função `validateQueryRequest(body: unknown): QueryRequest` que:
+- [x] Criar `lib/validator.ts`
+- [x] Implementar função `validateQueryRequest(body: unknown): QueryRequest` que:
   - Verifica se `api_key` está presente e é string não vazia
   - Verifica se `query_id` está presente e é string não vazia
   - Verifica se `sql` está presente, é string não vazia e começa com `SELECT` (case-insensitive)
@@ -82,7 +82,7 @@
   - Define `timeout_ms` como `300000` se ausente
   - Garante que `timeout_ms` está entre `5000` e `300000`
   - Lança erro tipado `ValidationError` com mensagem descritiva em caso de falha
-- [ ] Implementar função `validateApiKey(apiKey: string): boolean` que compara com `process.env.AGENT_API_KEY`
+- [x] Implementar função `validateApiKey(apiKey: string): boolean` que compara com `process.env.AGENT_API_KEY`
 
 ---
 
