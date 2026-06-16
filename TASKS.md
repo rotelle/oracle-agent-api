@@ -197,13 +197,13 @@
 ## FASE 10 — Executor Oracle (Go)
 
 - [ ] Criar `internal/oracle/executor.go`
-- [ ] Implementar struct `Executor` com campo `db *sql.DB`
-- [ ] Implementar função `NewExecutor(credentials *model.OracleCredentials) (*Executor, error)` que:
+- [x] Implementar struct `Executor` com campo `db *sql.DB`
+- [x] Implementar função `NewExecutor(credentials *model.OracleCredentials) (*Executor, error)` que:
   - Monta connection string Oracle no formato `user/password@host:port/service`
   - Abre pool de conexões com `sql.Open("godror", connStr)`
-  - Valida conexão com `db.Ping()`
+  - Valida conexão com `db.PingContext()`
   - Retorna `Executor` pronto
-- [ ] Implementar método `Execute(ctx context.Context, query model.QueryMessage) model.ResultMessage` que:
+- [x] Implementar método `Execute(ctx context.Context, query model.QueryMessage) model.ResultMessage` que:
   - Registra `time.Now()` para calcular `duration_ms`
   - Executa query com `db.QueryContext(ctx, sql, params...)`
   - Em caso de erro SQL: retorna `ResultMessage` com `status: "error"` e código `ORA-XXXXX` extraído da mensagem
@@ -211,14 +211,15 @@
   - Itera as linhas e escaneia valores como `interface{}`
   - Para cada valor, chama `normalizeValue(value, columnType)` antes de adicionar ao resultado
   - Retorna `ResultMessage` com `status: "success"`, colunas, linhas e contagens
-- [ ] Implementar função `normalizeValue(value interface{}, colType *sql.ColumnType) interface{}` que:
+- [x] Implementar função `normalizeValue(value interface{}, colType *sql.ColumnType) interface{}` que:
   - Detecta tipo Oracle pela string de `colType.DatabaseTypeName()`
-  - Para `DATE`: converte para string `"dd/mm/yyyy"`
-  - Para `TIMESTAMP`: converte para string `"dd/mm/yyyy hh:mm:ss"`
-  - Para `NUMBER`: retorna `int64` se sem escala, `float64` se com escala
+  - Para `DATE`: converte para string `"dd/mm/yyyy"` via normalizeDateValue
+  - Para `TIMESTAMP`: converte para string `"dd/mm/yyyy hh:mm:ss"` via normalizeTimestampValue
+  - Para `NUMBER`: retorna `int64` se sem escala, `float64` se com escala via normalizeNumberValue
   - Para `VARCHAR2`, `CHAR`, `CLOB`: retorna string
   - Para `nil`: retorna `nil`
-- [ ] Implementar função `extractOraError(err error) (code string, message string)` que extrai código `ORA-XXXXX` da mensagem de erro do godror
+- [x] Implementar função `extractOraError(err error) (code string, message string)` que extrai código `ORA-XXXXX` da mensagem de erro do godror
+- [x] Escrever testes unitários: normalização de datas, timestamps, números e extração de código ORA-XXXXX
 
 ---
 
