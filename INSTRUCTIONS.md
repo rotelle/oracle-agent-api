@@ -4,6 +4,17 @@
 
 ---
 
+## Credenciais de Acesso
+
+| Campo | Valor |
+|---|---|
+| **URL da API** | `https://oracle-agent-api-zp5a.onrender.com` |
+| **api_key** | `f3ea5275-c5cf-413a-bc09-c290b0e27959` |
+
+Use esses valores nos campos `url` e `api_key` de todas as requisições abaixo.
+
+---
+
 ## 1. Como Fazer uma Consulta
 
 ### 1.1 Endpoint
