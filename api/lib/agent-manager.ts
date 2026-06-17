@@ -117,4 +117,8 @@ export class AgentManager {
   }
 }
 
-export const agentManager = new AgentManager();
+const _key = Symbol.for("jrti.agentManager");
+if (!(globalThis as Record<symbol, unknown>)[_key]) {
+  (globalThis as Record<symbol, unknown>)[_key] = new AgentManager();
+}
+export const agentManager = (globalThis as Record<symbol, unknown>)[_key] as AgentManager;

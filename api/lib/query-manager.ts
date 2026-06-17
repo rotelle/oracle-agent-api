@@ -69,4 +69,8 @@ export class QueryManager {
   }
 }
 
-export const queryManager = new QueryManager();
+const _key = Symbol.for("jrti.queryManager");
+if (!(globalThis as Record<symbol, unknown>)[_key]) {
+  (globalThis as Record<symbol, unknown>)[_key] = new QueryManager();
+}
+export const queryManager = (globalThis as Record<symbol, unknown>)[_key] as QueryManager;
