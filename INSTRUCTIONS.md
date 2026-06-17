@@ -1,6 +1,6 @@
-# INSTRUCTIONS.md — Guia de Integração para a Aplicação de Relatório
+# INSTRUCTIONS.md — Guia de Integração para Manus
 
-> Este documento descreve como a aplicação de relatório deve construir consultas SQL compatíveis com Oracle 10g, formatar as requisições, e processar os retornos da API JRTi Oracle Query.
+> Este documento é direcionado à IA **Manus**. Ele descreve como você deve consultar o banco de dados Oracle 10g do sistema JRTi via API, construindo SQLs compatíveis, formatando as requisições e processando os retornos.
 
 ---
 
@@ -529,7 +529,7 @@ O Oracle não aceita array em parâmetro bind para `IN`. Para `IN` com valores d
 
 ---
 
-## 6. Boas Práticas para a Aplicação de Relatório
+## 6. Boas Práticas para Manus
 
 ### 6.1 Sempre limitar o resultado
 Consultas sem limite podem retornar milhares de linhas e estourar o timeout. Usar `ROWNUM` quando o volume for incerto:
